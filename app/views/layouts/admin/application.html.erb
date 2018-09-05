@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RBlog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'admin/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin/application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+      <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
+      <a class="navbar-brand">FlowerStore</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="<%= params[:controller] == 'admin/posts' ? 'active' : '' %>">
+            <a href="posts.html" style="padding-right:20px">Posts<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="<%= params[:controller] == 'admin/categories' ? 'active' : '' %>">
+            <a href="categories.html" style="padding-right:20px">Categories</a>
+          </li>
+          <li class="<%= params[:controller] == 'admin/users' ? 'active' : '' %>">
+            <a href="users.html" style="padding-right:20px">Users</a>
+          </li>
+        </ul>
+      <%= render 'partials/admin/search' %>
+
+      </div>
+    </nav>
+
+<main role="main" class="container">
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+          <!--Alert & Messages-->
+        <% if flash[:notice] %>
+         <div class="alert alert-success"><%= flash[:notice] %></div>
+        <% end %>
+
+        <% if flash[:alert] %>
+          <div class="alert alert-danger"><%= flash[:alert] %></div>
+        <% end %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<footer>
+  <p>Copyright &copy; 2018, rBlog | <a href="login.html">Admin Login</a></p>
+</footer>
+</body>
+</html>
